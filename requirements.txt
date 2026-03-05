@@ -1,0 +1,8 @@
+python-dotenv
+google-cloud-firestore
+google-cloud-secret-manager
+sqlalchemy
+pyodbc
+sqlglot
+polars
+google-cloud-storage

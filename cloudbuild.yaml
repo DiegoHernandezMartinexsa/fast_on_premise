@@ -1,0 +1,23 @@
+substitutions:
+  _IMAGE_NAME: 'fast_onpremise_etl'
+  _PROJECT_ID: 'icasa-dtlk-dev'
+  _REGION: 'us-east1'
+
+logsBucket: 'gs://build-logs-icasa'
+options:
+  logging: GCS_ONLY
+
+steps:
+  # Build the Docker image
+  - id: "build"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/containers/${_IMAGE_NAME}' , '.']
+    waitFor: ['-']
+
+  # Push the image to Artifact Registry
+  - id: "push"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/containers/${_IMAGE_NAME}']
+
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/containers/${_IMAGE_NAME}'
