@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DATABRICKS_BUCKET_NAME = os.getenv("GCS_LANDING_BUCKET", "icasa-landing-dev")
-PROJECT_ID = os.getenv("GCP_PROJECT_ID", "icasa-dtlk-dev")
+PROJECT_ID = os.getenv("GCP_PROJECT_ID", "icasa-datalake-dev")
 COLLECTION_NAME = "sync-config"
 MAX_WORKERS = min(32, (os.cpu_count() or 1) + 4)
 MAX_HISTORY_RANGES = 16
