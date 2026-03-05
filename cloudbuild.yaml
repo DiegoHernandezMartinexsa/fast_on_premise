@@ -3,7 +3,7 @@ substitutions:
 # _PROJECT_ID: 'icasa-dtlk-dev'
   _REGION: 'us-east1'
 
-logsBucket: 'gs://build-logs-icasa'
+logsBucket: 'gs://build-logs-icasa-datalake-dev'
 options:
   logging: GCS_ONLY
 
