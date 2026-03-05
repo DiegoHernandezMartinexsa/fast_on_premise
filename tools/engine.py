@@ -2,13 +2,20 @@ import os
 
 from google.cloud import secretmanager
 from sqlalchemy import create_engine
+from constants import PROJECT_ID
 
 
 def get_secret(secret_name: str) -> str:
     client = secretmanager.SecretManagerServiceClient()
-    name = f"projects/icasa-dtlk-dev/secrets/{secret_name}/versions/latest"
+    name = f"projects/{PROJECT_ID}/secrets/{secret_name}/versions/latest"
     response = client.access_secret_version(name=name, timeout=30)
-    return response.payload.data.decode("UTF-8")
+    ## return response.payload.data.decode("UTF-8")
+    try:
+        response = client.access_secret_version(name=name, timeout=30)
+        return response.payload.data.decode("UTF-8")
+    except Exception as e:
+        print(f"Error accediendo al secreto {secret_name}: {e}")
+        raise
 
 
 def create_sql_engine():
